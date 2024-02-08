@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
 
-function App() {
-  const [count, setCount] = useState(0)
+import { FormEvent, useEffect, useState } from "react"
+import { remult } from "remult"
+import { Task } from "./shared/Task"
+
+const taskRepo = remult.repo(Task);
+
+export default function App() {
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [newTaskTitle, setNewTaskTitle] = useState("")
+
+  const addTask = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      const newTask = await taskRepo.insert({ title: newTaskTitle })
+      setTasks([...tasks, newTask])
+      setNewTaskTitle("")
+    } catch (error) {
+      alert((error as { message: string }).message)
+    }
+  }
+ 
+ 
+ 
+  useEffect(() => {
+    taskRepo.find().then(setTasks);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Todos</h1>
+      <main>
+      <form onSubmit={addTask}>
+        <input
+          value={newTaskTitle}
+          placeholder="What needs to be done?"
+          onChange={e => setNewTaskTitle(e.target.value)}
+        />
+        <button>Add</button>
+      </form>
+        {tasks.map(task => {
+            const setTask = (value: Task) =>
+            setTasks(tasks => tasks.map(t => (t === task ? value : t)))
+      
+           const setCompleted = async (completed: boolean) =>
+            setTask(await taskRepo.save({ ...task, completed }))
+          return (
+            <div key={task.id}>
+              <input type="checkbox" checked={task.completed} 
+              onChange={e => setCompleted(e.target.checked)} />
+              {task.title}
+            </div>
+          )
+        })}
+      </main>
+    </div>
   )
 }
-
-export default App
