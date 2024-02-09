@@ -29,6 +29,8 @@ const RemultTesk = () => {
         })
         .subscribe((info) => setTasks(info.applyChanges));
     }, []);
+   
+    
   
     return (
       <div>
@@ -60,15 +62,18 @@ const RemultTesk = () => {
                 alert((error as { message: string }).message);
               }
             };
-  
+   
             const deleteTask = async () => {
-              try {
-                await taskRepo.delete(task);
-                //setTasks(tasks.filter((t) => t !== task));
-              } catch (error) {
-                alert((error as { message: string }).message);
-              }
-            };
+                try {
+                  await taskRepo.delete(task);
+                  //setTasks(tasks.filter((t) => t !== task));
+                } catch (error) {
+                  alert((error as { message: string }).message);
+                }
+              };
+            
+  
+           
             return (
               <div key={task.id}>
                 <input
@@ -81,7 +86,7 @@ const RemultTesk = () => {
                   onChange={(e) => setTitle(e.target.value)}
                 />
                 <button onClick={saveTask}>Save</button>
-                <button onClick={deleteTask}>Delete</button>
+                <button onClick={deleteTask} >Delete</button>
               </div>
             );
           })}
