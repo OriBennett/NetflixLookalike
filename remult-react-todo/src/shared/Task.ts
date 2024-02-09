@@ -1,6 +1,6 @@
-// src/shared/Task.ts
 
-import { Entity, Fields, Validators } from "remult"
+
+import { Entity, Fields} from "remult"
 
 @Entity("tasks", {
   allowApiCrud: true
@@ -8,8 +8,6 @@ import { Entity, Fields, Validators } from "remult"
 export class Task {
   @Fields.cuid()
   id = ""
-
-  
 
   @Fields.string({
     //validate: Validators.required this is a remult made validator
