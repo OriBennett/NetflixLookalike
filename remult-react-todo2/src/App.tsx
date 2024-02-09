@@ -33,6 +33,8 @@ export default function App() {
     await TasksController.setAllCompleted(completed)
   }
 
+  const seedData = async (data:any)
+
   return (
     <div>
       <h1>Todos</h1>
@@ -92,7 +94,9 @@ export default function App() {
             </div>
           )
         })}
-
+        <div>
+        <button onClick={seedData}>Save</button>
+        </div>
       </main>
     </div>
   )
