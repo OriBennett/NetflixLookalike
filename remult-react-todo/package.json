@@ -1,7 +1,7 @@
 {
   "name": "remult-react-todo",
   "private": true,
-  "version": "0.0.0",  
+  "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,6 +10,7 @@
     "dev-node": "tsx watch src/server"
   },
   "dependencies": {
+    "@types/mongodb": "^4.0.7",
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -3,7 +3,7 @@
 import { Entity, Fields} from "remult"
 import { Content } from "./Content"
 
-@Entity("tasks", {
+@Entity("users", {
   allowApiCrud: true
 })
 export class User {

@@ -2,8 +2,12 @@
 import { FormEvent, useEffect, useState } from "react";
 import { remult } from "remult";
 import { Task } from "../shared/Task";
+import { Content } from "../shared/Content";
+import {data} from "../../db/tasks.json"
+
 
 const taskRepo = remult.repo(Task);
+const contentRepo = remult.repo(Content);
 const RemultTesk = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -19,9 +23,33 @@ const RemultTesk = () => {
         alert((error as { message: string }).message);
       }
     };
+    // const addcon = async (e: FormEvent) => {
+    //   e.preventDefault();
+    //   try {
+    //     const c=data.content.map(async (item: { title: any; description: any; img: any; imgTitle: any; imgThumb: any; imgVertical: any; trailer: any; movie: any; duration: any; year: any; limit: any; genre: any; isSeries: any; }) =>{
+    //     await contentRepo.insert({ title: item.title,
+    //         description: item.description,
+    //         img: item.img,
+    //         imgTitle: item.imgTitle,
+    //         imgThumb: item.imgThumb,
+    //         imgVertical: item.imgVertical,
+    //         trailer: item.trailer,
+    //         movie: item.movie,
+    //         duration: item.duration,
+    //         year: item.year,
+    //         limit: item.limit,
+    //         genre: item.genre,
+    //         isSeries: item.isSeries, });}) // <- replace with this line
+        
+    //   } catch (error) {
+    //     alert((error as { message: string }).message);
+    //   }
+    // };
   
     useEffect(() => {
-      return taskRepo
+        
+      
+        return taskRepo
         .liveQuery({
           limit: 20,
           orderBy: { createdAt: "asc" },
