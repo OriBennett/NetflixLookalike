@@ -7,9 +7,9 @@ import { Content } from "../shared/Content"
 
 export const api = remultExpress({
   entities: [Task,Content],dataProvider: async () => {
-    const client = new MongoClient("mongodb+srv://oribennett:DevDev@cluster0.8peh6zz.mongodb.net/NetflixLookalike?retryWrites=true&w=majority")
+    const client = new MongoClient("mongodb+srv://muslerbar:dev1@cluster0.5byzn7y.mongodb.net/NetflixCopy?retryWrites=true&w=majority")
     await client.connect()
-    return new MongoDataProvider(client.db("NetflixLookalike"), client)
+    return new MongoDataProvider(client.db("NetflixCopy"), client)
   }
 
 })
