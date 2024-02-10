@@ -1,6 +1,6 @@
 
 
-import { Entity, Fields} from "remult"
+import { Entity, Fields, Validators} from "remult"
 import { Content } from "./Content"
 
 @Entity("users", {
@@ -16,9 +16,7 @@ export class User {
       id = ""
 
    @Fields.string({
-    validate: (user) => {
-        if (user.userName.length < 3) throw "Too Short"
-      }
+     validate: Validators.unique
    })
    userName= ""
    

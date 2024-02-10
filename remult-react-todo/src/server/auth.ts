@@ -1,19 +1,15 @@
-// src/server/auth.ts
-
 import express, { Router } from "express"
-import type { UserInfo } from "remult"
+import { remult} from "remult"
+import { User } from "../shared/User";
 
-const validUsers: UserInfo[] = [
-  { id: "1", name: "Jane" },
-  { id: "2", name: "Steve" }
-]
+const validUsers= remult.repo(User);
 
 export const auth = Router()
 
 auth.use(express.json())
 
 auth.post("/api/signIn", (req, res) => {
-  const user = validUsers.find(user => user.name === req.body.username)
+  const user = validUsers.find(user => user.userName === req.body.username)
   if (user) {
     req.session!["user"] = user
     res.json(user)
