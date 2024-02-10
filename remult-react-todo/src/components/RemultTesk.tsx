@@ -28,7 +28,7 @@ const RemultTesk = () => {
       e.preventDefault();
       console.log("step 1")
       try {
-        const c=data.content.map(async (item: { title: any; description: any; img: any; imgTitle: any; imgThumb: any; imgVertical: any; trailer: any; movie: any; duration: any; year: any; limit: any; genre: any; isSeries: any; }) =>{
+        const c = data.content.map(async (item: { title: any; description: any; img: any; imgTitle: any; imgThumb: any; imgVertical: any; trailer: any; movie: any; duration: any; year: any; limit: any; genre: any; isSeries: any; }) =>{
         await contentRepo.insert({ title: item.title,
             description: item.description,
             img: item.img,
@@ -41,16 +41,14 @@ const RemultTesk = () => {
             year: item.year,
             limit: item.limit,
             genre: item.genre,
-            isSeries: item.isSeries, });}) // <- replace with this line
+            isSeries: item.isSeries, });}) 
         
       } catch (error) {
         alert((error as { message: string }).message);
       }
     };
   
-    useEffect(() => {
-        
-      
+    useEffect(() => {     
         return taskRepo
         .liveQuery({
           limit: 20,
